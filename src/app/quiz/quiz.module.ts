@@ -2,13 +2,22 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { QuizPanelComponent } from './quiz-panel/quiz-panel.component';
-import { QuestionService } from './question.service';
+import { QuizService } from './quiz.service';
+import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [QuizPanelComponent],
-  providers: []
+  declarations: [
+    QuizPanelComponent,
+    QuizQuestionComponent
+  ],
+  providers: [
+    QuizService
+  ],
+  exports: [
+    QuizPanelComponent
+  ]
 })
 export class QuizModule { }

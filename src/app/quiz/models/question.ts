@@ -11,14 +11,14 @@ export class Question {
   ) {}
 
   // Public interface of the Question
-  public get question() { return this.qObj.question }
-  public get answers() { return this.qObj.answers }
+  public get question() { return this.qObj.question; }
+  public get answers() { return this.qObj.answers; }
   public get correct() {
-    return this.qObj.answers[this.qObj.correctIndex]
+    return this.qObj.answers[this.qObj.correctIndex];
   }
 
-  public isCorrect(answer: string) {
-    return answer === this.correct;
+  public isCorrect(answerIndex: number) {
+    return answerIndex === this.qObj.correctIndex;
   }
 
 }

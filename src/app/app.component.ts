@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Quiz, Quizable, QuestionObject } from './quiz';
+
+import DemoQuestions from './demo-questions';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+
+  quiz: Quiz = Quiz.make({
+    id: 'myQuiz',
+    questions: DemoQuestions
+  })
+
 }

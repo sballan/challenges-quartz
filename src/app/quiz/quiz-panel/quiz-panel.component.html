@@ -1,3 +1,10 @@
 <p>
   quiz-panel works!
 </p>
+
+<app-quiz-question [question]="currentQuestion"></app-quiz-question>
+
+<button (click)="getNextQuestion()">
+  {{buttonText}}
+</button>
+

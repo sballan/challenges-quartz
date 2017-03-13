@@ -1,13 +1,28 @@
 import { Question, QuestionObject } from './question';
-import * as _ from 'lodash';
+
+export interface Quizable {
+  id: string;
+  questions: QuestionObject[];
+}
 
 export class Quiz {
-  answers: Map<Question, number> = new Map();
+  answers: WeakMap<Question, number> = new WeakMap();
 
   constructor(
-    public name?: string,
-    public questions?: Question[]
+    // Quick and (very) dirty way to get a unique id;
+    public id: string = Math.random().toString(),
+    public questions: Question[] = []
   ) {  }
+
+  static make(qObj: Quizable) {
+    const quiz = new Quiz(qObj.id);
+
+    qObj.questions.forEach(q => {
+      quiz.addQuestion(q);
+    })
+
+    return quiz;
+  }
 
   addQuestion(qObj: QuestionObject) {
     const question = new Question(qObj);
@@ -15,13 +30,8 @@ export class Quiz {
     return question;
   }
 
-  setAnswer(question: Question, answerIndex: number) {
-    this.answers.set(question, answerIndex);
+  get length() {
+    return this.questions.length;
   }
-
-  getAnswer(question: Question) {
-    return this.answers.get(question);
-  }
-
 
 }

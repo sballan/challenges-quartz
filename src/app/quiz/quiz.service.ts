@@ -48,14 +48,14 @@ export class QuizService {
     return this;
   }
 
-  // Finds the answerSet for the quiz, finds the correct question, and adds the answerIndex
-  addAnswer(quiz = this.currentQuiz, qIdx, aIdx) : QuizService {
-    if (!quiz) throw Error(`No quiz argument provided, and no currentQuiz in service.`);
+  // // Finds the answerSet for the quiz, finds the correct question, and adds the answerIndex
+  // addAnswer(quiz = this.currentQuiz, qIdx, aIdx) : QuizService {
+  //   if (!quiz) throw Error(`No quiz argument provided, and no currentQuiz in service.`);
 
-    const answerSet = this.getAnswerSet(quiz);
-    answerSet.addAnswer(qIdx, aIdx);
-    return this;
-  }
+  //   const answerSet = this.getAnswerSet(quiz);
+  //   answerSet.addAnswer(qIdx, aIdx);
+  //   return this;
+  // }
 
   addAnswerSet(quiz: Quiz = this.currentQuiz, answerSet: AnswerSet) : QuizService {
     if (!quiz) throw Error(`No quiz argument provided, and no currentQuiz in service.`);

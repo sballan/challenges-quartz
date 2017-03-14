@@ -4,6 +4,7 @@ import { QuizService } from '../quiz.service';
 import { Quiz } from '../models';
 
 @Component({
+  moduleId: module.id,
   selector: 'app-quiz-panel',
   templateUrl: './quiz-panel.component.html',
   styleUrls: ['./quiz-panel.component.css'],
@@ -17,7 +18,12 @@ export class QuizPanelComponent implements OnInit {
   setCurrent = false;
 
   private currentQuestionIdx = 0;
+  private currentAnswerIdx: number;
   private quizLength;
+
+  public onAnswerChoice(aIdx: number) {
+    this.currentAnswerIdx = aIdx;
+  }
 
   public get buttonText() {
     return this.hasNextQuestion ? "Next Question" : "Finish Quiz";
@@ -37,9 +43,16 @@ export class QuizPanelComponent implements OnInit {
 
   public getNextQuestion() {
     if (this.hasNextQuestion) {
+
+      this.quizService.addAnswer(
+        this.quiz,
+        this.currentQuestionIdx,
+        this.currentAnswerIdx
+      );
+
       this.currentQuestionIdx++;
     } else {
-      throw Error('There is no next question')
+      throw Error('There is no next question');
     }
   }
 

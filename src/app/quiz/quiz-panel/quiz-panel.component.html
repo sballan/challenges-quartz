@@ -2,7 +2,11 @@
   quiz-panel works!
 </p>
 
-<app-quiz-question [question]="currentQuestion"></app-quiz-question>
+<app-quiz-question
+  [question]="currentQuestion"
+  (onAnswerChoice)="onAnswerChoice($event)"
+  >
+</app-quiz-question>
 
 <button (click)="getNextQuestion()">
   {{buttonText}}

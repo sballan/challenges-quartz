@@ -20,6 +20,16 @@ const DemoQuestions: QuestionObject[] = [
       `I don't like Classic Rock`
     ],
     correctIndex: 2
+  },
+  {
+    question: `Which JavaScript framework is the best?`,
+    answers: [
+      `Angular`,
+      `React`,
+      `Vue`,
+      `VanillaJS`
+    ],
+    correctIndex: 0
   }
 ]
 

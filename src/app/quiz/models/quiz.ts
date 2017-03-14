@@ -6,7 +6,12 @@ export interface Quizable {
 }
 
 export class Quiz {
-  answers: WeakMap<Question, number> = new WeakMap();
+  static make(qObj: Quizable) {
+    const quiz = new Quiz(qObj.id);
+    quiz.addQuestions(qObj.questions);
+
+    return quiz;
+  }
 
   constructor(
     // Quick and (very) dirty way to get a unique id;
@@ -14,15 +19,6 @@ export class Quiz {
     public questions: Question[] = []
   ) {  }
 
-  static make(qObj: Quizable) {
-    const quiz = new Quiz(qObj.id);
-
-    qObj.questions.forEach(q => {
-      quiz.addQuestion(q);
-    })
-
-    return quiz;
-  }
 
   addQuestion(qObj: QuestionObject) {
     const question = new Question(qObj);
@@ -30,8 +26,17 @@ export class Quiz {
     return question;
   }
 
+  addQuestions(qObjs: QuestionObject[]) {
+    return qObjs.map(q => {
+      return this.addQuestion(q);
+    })
+  }
+
   get length() {
     return this.questions.length;
   }
+
+
+
 
 }

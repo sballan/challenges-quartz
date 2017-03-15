@@ -3,6 +3,20 @@ This is the host app I used to run the quiz module.  The quiz module has no exte
 
 The quiz can be styled however you like from the host app, using the provided ":host /deep/" css selectors.
 
+### Use it with a simple import
+To use the quiz, simply import the QuizModule to your AppModule.  That's it!
+
+### State is kept in three services: Quiz, Question, and Answers.  
+
+Quiz keeps track of the quizes you've made (multiple quizes are supported).
+
+Question keeps track of relevent metadata for a particular question, without touching the actual Quiz or Question objects.
+
+Answers keeps track of answers provided for particular questions, without touching the Quiz or Question objects.
+
+The QuizPanel provides an easy to use interface for the QuizQuestion and QuizAnswers components, but these components can be used in isolation (with the help of the services) to easily construct your own custom Quiz.
+
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.1.
 

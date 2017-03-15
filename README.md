@@ -4,7 +4,7 @@ This is the host app I used to run the quiz module.  The quiz module has no exte
 The quiz can be styled however you like from the host app, using the provided ":host /deep/" css selectors.
 
 ### Use it with a simple import
-To use the quiz, simply import the QuizModule to your AppModule.  That's it!
+To use the quiz, simply import the QuizModule to your AppModule.  That's it!  The quiz files are kept at /src/app/quiz, but it doesn't matter where you keep them.
 
 ### State is kept in three services: Quiz, Question, and Answers.  
 

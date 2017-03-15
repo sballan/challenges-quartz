@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Question } from '../models';
+import { Question, AnswerSet } from '../models';
 
 @Component({
   moduleId: module.id,

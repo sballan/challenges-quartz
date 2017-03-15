@@ -43,14 +43,8 @@ export class QuizPanelComponent implements OnInit {
 
   public getNextQuestion() {
     if (this.hasNextQuestion) {
-
-      this.quizService.addAnswer(
-        this.quiz,
-        this.currentQuestionIdx,
-        this.currentAnswerIdx
-      );
-
       this.currentQuestionIdx++;
+      this.currentAnswerIdx = undefined;
     } else {
       throw Error('There is no next question');
     }

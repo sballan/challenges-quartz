@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Quiz, Question, Quizable, AnswerSet } from './models';
+import { Quiz, Question, Quizable, AnswerSet, AnswersMap } from './models';
 
 @Injectable()
 export class QuizService {
@@ -8,16 +8,13 @@ export class QuizService {
   // Map of quiz.id to quiz
   private quizMap: Map<string, Quiz> = new Map();
   // WeakMap to keep answer sets as long as a quiz exists
-  private answerSetMap: WeakMap<Quiz, AnswerSet> = new WeakMap();
+  private answersMap: AnswersMap
 
 
   // Methods are chainable
 
-  private getAnswerSet(quiz: Quiz) {
-    if (!this.answerSetMap.has(quiz)) {
-      throw Error(`Quiz "${quiz.id} was added improperly`);
-    }
-    return this.answerSetMap.get(quiz);
+  private getAnswerSet(quiz: Quiz, index?: number) {
+    return this.answersMap.getAnswerSet(quiz, index);
   }
 
   private getQuestion(quiz: Quiz, qIdx: number) {
@@ -36,9 +33,13 @@ export class QuizService {
     return this;
   }
 
+  getQuiz(id: string) {
+    return this.quizMap.get(id);
+  }
+
   addQuiz(quiz: Quiz, setAsCurrent: boolean = false) : QuizService {
     this.quizMap.set(quiz.id, quiz);
-    this.answerSetMap.set(quiz, new AnswerSet(quiz.length));
+    this.answersMap.addQuiz(quiz);
     if (setAsCurrent) { this.setCurrentQuiz(quiz); }
     return this;
   }
@@ -48,26 +49,16 @@ export class QuizService {
     return this;
   }
 
-  // // Finds the answerSet for the quiz, finds the correct question, and adds the answerIndex
-  // addAnswer(quiz = this.currentQuiz, qIdx, aIdx) : QuizService {
-  //   if (!quiz) throw Error(`No quiz argument provided, and no currentQuiz in service.`);
-
-  //   const answerSet = this.getAnswerSet(quiz);
-  //   answerSet.addAnswer(qIdx, aIdx);
-  //   return this;
-  // }
-
   addAnswerSet(quiz: Quiz = this.currentQuiz, answerSet: AnswerSet) : QuizService {
     if (!quiz) throw Error(`No quiz argument provided, and no currentQuiz in service.`);
 
-    const origAnswerSet = this.getAnswerSet(quiz);
-    origAnswerSet.mergeSet(answerSet);
+    this.answersMap.addAnswerSet(quiz, answerSet);
     return this;
   }
 
-  // Get the score for a certain answer index.  Defaults to latest answer index. Returns array with number correct and total number.
+    // Get the score for a certain answer index.  Defaults to latest answer index. Returns array with number correct and total number.
   getScore(quiz: Quiz = this.currentQuiz, aIdx: number = -1) : number[] {
-    const answers = this.getAnswerSet(quiz).getAnswers(aIdx);
+    const answers = this.answersMap.getAnswerSet(quiz, aIdx).getAnswers();
     let correctCounter = 0;
 
     answers.forEach((aIdx, qIdx)=> {
@@ -77,5 +68,9 @@ export class QuizService {
 
     return [correctCounter, quiz.length];
   }
+
+
+
+
 
 }

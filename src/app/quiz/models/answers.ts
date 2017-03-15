@@ -28,45 +28,4 @@ export class AnswerSet {
   get first() { return this._answers[0]; }
 }
 
-export class QuestionSet {
-  private answerSets: WeakMap<Question, AnswerSet> = new WeakMap();
-  private qIdxs: WeakMap<Question, number> = new WeakMap();
 
-  constructor(quiz?: Quiz) {
-    if (quiz) { this.init(quiz); }
-  }
-
-  init(quiz: Quiz) {
-    quiz.questions.forEach((q, i) => {
-      this.qIdxs.set(q, i);
-      this.answerSets.set(q, new AnswerSet());
-    });
-  }
-
-  getAnswerSet(question: Question, index: number = -1) {
-    this.assertQuiz(question);
-
-    const aSets = this.answerSets.get(question)
-    index = (index === -1) ? aSets.length : index;
-    return aSets[index];
-  }
-
-  getAnswerSets(question: Question) {
-    this.assertQuiz(question);
-
-    return this.answerSets.get(question);
-  }
-
-  addAnswerSet(question: Question, answerSet: AnswerSet) {
-    this.getAnswerSets(question).push(answerSet);
-  }
-
-  assertQuiz(question: Question) : boolean {
-    if (!this.answerSets.has(question)) {
-      throw Error(`This quiz hasn't been added to the answerSets: ${question}`);
-    }
-    return true;
-  }
-
-
-}

@@ -29,7 +29,7 @@ export class QuizPanelComponent implements OnInit {
     this.active = true;
   }
 
-  finishQuiz(scoreObj: ScoreObj) {
+  onFinished(scoreObj: ScoreObj) {
     this.finished = true;
     this.scoreString = `${scoreObj.score[0]} out of ${scoreObj.score[1]}`
     console.log(scoreObj);

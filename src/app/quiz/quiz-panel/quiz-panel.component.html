@@ -5,7 +5,7 @@
   <app-quiz-question
     [hidden]="!active || finished"
     [active]="active"
-    (onFinished)="finishQuiz($event)"
+    (onFinished)="onFinished($event)"
     >
   </app-quiz-question>
 
@@ -13,12 +13,6 @@
   [hidden]="active || finished"
     (click)="startQuiz()">
     Start Quiz
-  </button>
-
-  <button
-  [hidden]="!finished"
-    (click)="finishQuiz()">
-    Finish Quiz
   </button>
 
   <p [hidden]="!(active && finished)"> Thanks for taking the quiz! You got {{scoreString}} correct!</p>

@@ -1,0 +1,12 @@
+:host /deep/ app-quiz-panel {
+  /* Style the quiz panel here*/
+}
+
+:host /deep/ app-quiz-question {
+  /* Style the quiz question here*/
+}
+
+:host /deep/ app-quiz-answers {
+  /* Style the quiz answers here*/
+}
+

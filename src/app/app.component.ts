@@ -11,7 +11,7 @@ import DemoQuestions from './demo-questions';
   providers: [QuizService]
 })
 export class AppComponent implements OnInit {
-  title = 'app works!';
+  title = 'Host App for Quartz Quiz!';
   quiz: Quiz;
 
   constructor(

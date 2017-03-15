@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Quiz, Question, Quizable, AnswerSet, QuestionSet } from '../models';
+import { Quiz, Question, Quizable, AnswerSet } from '../models';
 
 @Injectable()
 export class QuizService {

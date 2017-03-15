@@ -19,9 +19,14 @@ export class QuizQuestionComponent implements OnInit {
     private answerService: AnswerService
   ) { }
 
-
-  get currentQuestion() : Question {
+  get currentQuestion(): Question {
+    console.log("accessing question service from quiz question")
     return this.questionService.currentQuestion;
+  }
+
+  get questionText() {
+    console.log("accessing question text from quiz question")
+    return this.currentQuestion.question;
   }
 
   get hasNext(): boolean {
@@ -41,9 +46,7 @@ export class QuizQuestionComponent implements OnInit {
   //   this.onAnswerChoice.emit(aIdx);
   // }
 
-  get questionText() {
-    return this.currentQuestion.question;
-  }
+
 
   ngOnInit() {
   }

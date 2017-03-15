@@ -19,12 +19,10 @@ export class AppComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.quizService.makeQuiz({
+    this.quiz = this.quizService.makeQuiz({
       id: 'myQuiz',
       questions: DemoQuestions
     }).getQuiz('myQuiz');
-
-    console.log("CurrentQuiz: ", this.quizService.currentQuiz);
   }
 
 

@@ -4,7 +4,7 @@ import { Quiz, Question, Quizable, AnswerSet, QuestionSet } from '../models';
 
 @Injectable()
 export class QuizService {
-  public currentQuiz: Quiz = undefined;
+  public currentQuiz: Quiz = null;
   // Map of quiz.id to quiz
   private quizMap: Map<string, Quiz> = new Map();
 
@@ -14,6 +14,7 @@ export class QuizService {
     if (typeof quiz === 'string') {
       quiz = this.getQuiz(quiz);
     }
+    console.log("setting current quiz");
     this.currentQuiz = quiz;
     return this;
   }
@@ -26,7 +27,6 @@ export class QuizService {
 
   addQuiz(quiz: Quiz) : QuizService {
     this.quizMap.set(quiz.id, quiz);
-    this.setCurrentQuiz(quiz);
     return this;
   }
 

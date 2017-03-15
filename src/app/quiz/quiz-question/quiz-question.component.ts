@@ -46,7 +46,6 @@ export class QuizQuestionComponent implements OnInit {
   }
 
   onAnswerChoice(aIdx: number) {
-    console.log("ON ANSWER CHOICE", aIdx)
     this.currentAIdx = aIdx;
   }
 
@@ -57,7 +56,6 @@ export class QuizQuestionComponent implements OnInit {
 
   proceed() {
     if (this.hasNext) {
-      console.log("PROCEED, hasNext")
       this.getNextQuestion();
     }
     else { this.submit(); }
@@ -65,7 +63,6 @@ export class QuizQuestionComponent implements OnInit {
 
   getNextQuestion() {
     if (this.currentAIdx >= 0) {
-      console.log("SUPER adding to question", this.currentAIdx)
       this.addAnswer();
       this.questionService.getNext();
     }
@@ -73,9 +70,7 @@ export class QuizQuestionComponent implements OnInit {
 
   submit() {
     this.addAnswer();
-    console.log("I'M SUBMITTING", this.currentQuiz)
     const scoreObj = this.answerService.getScore(this.currentQuiz);
-    console.log("AND I GOT THE SCORE!")
     this.onFinished.emit(scoreObj);
   }
 

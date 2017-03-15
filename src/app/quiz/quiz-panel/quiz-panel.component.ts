@@ -32,14 +32,13 @@ export class QuizPanelComponent implements OnInit {
   onFinished(scoreObj: ScoreObj) {
     this.finished = true;
     this.scoreString = `${scoreObj.score[0]} out of ${scoreObj.score[1]}`
-    console.log(scoreObj);
   }
 
   ngOnInit() {
     if (this.quiz) {
       this.quizService.setCurrentQuiz(this.quiz);
     } else {
-      console.log("HELP! No Quiz")
+      console.error("HELP! No Quiz")
     }
 
     setTimeout(() => {

@@ -14,7 +14,6 @@ export class QuizService {
     if (typeof quiz === 'string') {
       quiz = this.getQuiz(quiz);
     }
-    console.log("setting current quiz");
     this.currentQuiz = quiz;
     return this;
   }

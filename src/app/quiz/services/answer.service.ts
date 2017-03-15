@@ -34,8 +34,6 @@ export class AnswerService {
   get currentQuestion() { return this.questionService.currentQuestion; }
 
   add(aIdx: number, question?: Question) {
-    console.log("got to add")
-    console.log("and question is: ", question)
     const answer = new Answer(aIdx);
 
     if (!this.answerMap.has(question)) {
@@ -45,17 +43,14 @@ export class AnswerService {
   }
 
   getLastAnswer(question: Question = this.currentQuestion) {
-    console.log("Last Answer", this.answerMap.get(question));
     return this.answerMap.get(question).last;
   }
 
   getLastAnswers(questions: Question[] = this.currentQuiz.questions) {
-    console.log("All Last Answers", questions);
     return questions.map(q => this.getLastAnswer(q));
   }
 
   getScore(quiz: Quiz = this.currentQuiz): ScoreObj {
-    console.log("GET SCORE");
     const questions = quiz.questions;
     const answers = this.getLastAnswers(questions);
     const score = this.scoreQuestions(questions, answers);

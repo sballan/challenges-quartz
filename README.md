@@ -1,6 +1,8 @@
 # Quiz Challenge
 This is the host app I used to run the quiz module.  The quiz module has no external dependencies, and should run in any Angular2 app made with the angular-cli.
 
+The quiz can be styled however you like from the host app, using the provided ":host /deep/" css selectors.
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.1.
 

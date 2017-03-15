@@ -1,5 +1,5 @@
 :host /deep/ app-quiz-panel {
-  /* Style the quiz panel here*/
+    /* Style the quiz panel here*/
 }
 
 :host /deep/ app-quiz-question {
@@ -9,4 +9,6 @@
 :host /deep/ app-quiz-answers {
   /* Style the quiz answers here*/
 }
+
+
 

@@ -1,37 +1,49 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { Question, AnswerSet } from '../models';
+import { QuestionService } from '../services/question.service';
+import { AnswerService } from '../services/answer.service';
 
 @Component({
   moduleId: module.id,
   selector: 'app-quiz-question',
   templateUrl: './quiz-question.component.html',
-  styleUrls: ['./quiz-question.component.css']
+  styleUrls: ['./quiz-question.component.css'],
+  providers: [QuestionService]
 })
 export class QuizQuestionComponent implements OnInit {
-  @Input() question: Question;
-  @Output() onAnswerChoice = new EventEmitter<number>();
+  @Output() onSubmission = new EventEmitter<number>();
 
-  private _currentAnswer: number;
+  constructor(
+    private questionService: QuestionService,
+    private answerService: AnswerService
+  ) { }
 
-  public get currentAnswer() : number {
-    return this._currentAnswer;
+
+  get currentQuestion() : Question {
+    return this.questionService.currentQuestion;
   }
 
-  public set currentAnswer(aIdx: number) {
-    this._currentAnswer = aIdx;
-    this.onAnswerChoice.emit(aIdx);
+  get hasNext(): boolean {
+    return this.questionService.hasNext;
   }
 
-  constructor() { }
+  getNextQuestion() {
 
-  public get questionText() {
-    return this.question.question;
   }
 
-  public get answersText() {
-    return this.question.answers;
-  }
+  // get currentAnswer() : number {
+  //   return this._currentAnswer;
+  // }
 
+  // set currentAnswer(aIdx: number) {
+  //   this._currentAnswer = aIdx;
+  //   this.onAnswerChoice.emit(aIdx);
+  // }
+
+  get questionText() {
+    return this.currentQuestion.question;
+  }
 
   ngOnInit() {
   }

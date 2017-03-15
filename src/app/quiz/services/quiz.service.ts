@@ -26,6 +26,7 @@ export class QuizService {
 
   addQuiz(quiz: Quiz) : QuizService {
     this.quizMap.set(quiz.id, quiz);
+    this.setCurrentQuiz(quiz);
     return this;
   }
 

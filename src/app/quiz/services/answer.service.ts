@@ -24,13 +24,14 @@ export class AnswerService {
     this.add(this.currentQuestion, aIdx);
   }
 
+  getAnswer(question: Question) {
+    return this.answerMap.get(question).last;
+  }
+
   getAnswers(question: Question) {
     return this.answerMap.get(question).all;
   }
 
-  get(question: Question) {
-    return this.answerMap.get(question).last;
-  }
 
 
 }

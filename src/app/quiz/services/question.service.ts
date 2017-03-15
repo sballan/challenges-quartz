@@ -17,7 +17,12 @@ export class QuestionService {
 
   // currentQuiz can change live, and all the meta data is stored here. No need for a map of quizes here.
   get currentQuiz() { return this.quizService.currentQuiz; }
-  set currentQuiz(quiz: Quiz) { this.quizService.currentQuiz = quiz; }
+  set currentQuiz(quiz: Quiz) {
+    if (!this.quizMeta.has(quiz)) {
+      this.quizMeta.set(quiz, {qIdxCurrent: 0});
+    }
+    this.quizService.currentQuiz = quiz;
+  }
 
   get currentMeta() { return this.quizMeta.get(this.currentQuiz); }
 

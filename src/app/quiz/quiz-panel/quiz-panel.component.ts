@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { QuizService } from '../quiz.service';
+import { QuizService } from '../services/quiz.service';
 import { Quiz } from '../models';
 
 @Component({
@@ -14,46 +14,47 @@ export class QuizPanelComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
-  @Input()
-  setCurrent = false;
+  // private currentQuestionIdx = 0;
+  // private currentAnswerIdx: number;
+  // private quizLength;
 
-  private currentQuestionIdx = 0;
-  private currentAnswerIdx: number;
-  private quizLength;
+  constructor(
+    private quizService: QuizService
+  ) { }
 
-  public onAnswerChoice(aIdx: number) {
-    this.currentAnswerIdx = aIdx;
+
+  // public onAnswerChoice(aIdx: number) {
+  //   this.currentAnswerIdx = aIdx;
+  // }
+
+  // public get buttonText() {
+  //   return this.hasNextQuestion ? "Next Question" : "Finish Quiz";
+  // }
+
+  // public get currentQuestion() {
+  //   return this.quiz.questions[this.currentQuestionIdx];
+  // }
+
+  // public get hasNextQuestion() : boolean {
+  //   return this.currentQuestionIdx < this.quiz.length - 1;
+  // }
+
+  public submitQuiz() {
+
   }
 
-  public get buttonText() {
-    return this.hasNextQuestion ? "Next Question" : "Finish Quiz";
-  }
+  // public getNextQuestion() {
+  //   if (this.hasNextQuestion) {
+  //     this.currentQuestionIdx++;
+  //     this.currentAnswerIdx = undefined;
+  //   } else {
+  //     throw Error('There is no next question');
+  //   }
+  // }
 
-  public get currentQuestion() {
-    return this.quiz.questions[this.currentQuestionIdx];
-  }
-
-  public get hasNextQuestion() : boolean {
-    return this.currentQuestionIdx < this.quiz.length - 1;
-  }
-
-  public get hasPrevQuestion() : boolean {
-    return this.currentQuestionIdx > 0;
-  }
-
-  public getNextQuestion() {
-    if (this.hasNextQuestion) {
-      this.currentQuestionIdx++;
-      this.currentAnswerIdx = undefined;
-    } else {
-      throw Error('There is no next question');
-    }
-  }
-
-  constructor(private quizService: QuizService) {  }
 
   ngOnInit() {
-    if (this.setCurrent && this.quiz) {
+    if (this.quiz) {
       this.quizService.setCurrentQuiz(this.quiz);
     }
   }

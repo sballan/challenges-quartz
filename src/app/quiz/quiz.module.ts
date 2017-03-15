@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { QuizPanelComponent } from './quiz-panel/quiz-panel.component';
-import { QuizService } from './quiz.service';
 import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
+import { QuizAnswersComponent } from './quiz-answers/quiz-answers.component';
 
+import { QuizService, QuestionService, AnswerService } from './services';
 @NgModule({
   imports: [
     FormsModule,
@@ -13,10 +14,13 @@ import { QuizQuestionComponent } from './quiz-question/quiz-question.component';
   ],
   declarations: [
     QuizPanelComponent,
-    QuizQuestionComponent
+    QuizQuestionComponent,
+    QuizAnswersComponent
   ],
   providers: [
-    QuizService
+    QuizService,
+    QuestionService,
+    AnswerService
   ],
   exports: [
     QuizPanelComponent

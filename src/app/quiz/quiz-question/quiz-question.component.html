@@ -3,12 +3,12 @@
 </p>
 
 <h3>{{questionText}}</h3>
-<ul>
-  <li *ngFor="let answer of answersText; let i = index">
-    <input name="options" type="radio"
-      [(ngModel)]="currentAnswer"
-      [value]="i"
-      [checked]="currentAnswer==1" />
-    {{answer}}
-  </li>
-</ul>
+<app-quiz-answers [currentQuestion]="currentQuestion">
+</app-quiz-answers>
+
+<button
+  [hidden]="!hasNext"
+  (click)="getNextQuestion()">
+  {{buttonText}}
+</button>
+

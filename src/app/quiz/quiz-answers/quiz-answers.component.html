@@ -1,0 +1,13 @@
+<p>
+  quiz-answers works!
+</p>
+
+<ul>
+  <li *ngFor="let answer of answersText; let i = index">
+    <input name="options" type="radio"
+      [(ngModel)]="currentAnswer"
+      [value]="i"
+      [checked]="currentAnswer==i" />
+    {{answer}}
+  </li>
+</ul>

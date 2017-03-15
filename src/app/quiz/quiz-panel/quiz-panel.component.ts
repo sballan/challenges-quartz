@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { QuizService } from '../services/quiz.service';
-import { Quiz } from '../models';
+import { ScoreObj } from '../services/answer.service';
+import { Quiz, Answer } from '../models';
 
 @Component({
   moduleId: module.id,
@@ -14,12 +15,24 @@ export class QuizPanelComponent implements OnInit {
   @Input()
   quiz: Quiz;
 
+  public active = false;
+  public finished = false;
+  public hide = false;
+
+  public scoreString: string;
+
   constructor(
     private quizService: QuizService
   ) {  }
 
-  public submitQuiz() {
+  startQuiz() {
+    this.active = true;
+  }
 
+  finishQuiz(scoreObj: ScoreObj) {
+    this.finished = true;
+    this.scoreString = `${scoreObj.score[0]} out of ${scoreObj.score[1]}`
+    console.log(scoreObj);
   }
 
   ngOnInit() {
@@ -28,6 +41,12 @@ export class QuizPanelComponent implements OnInit {
     } else {
       console.log("HELP! No Quiz")
     }
+
+    setTimeout(() => {
+      if (!this.active) {
+        this.hide = true;
+      }
+    }, 5000);
   }
 
 }

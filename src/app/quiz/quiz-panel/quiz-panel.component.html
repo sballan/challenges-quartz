@@ -1,13 +1,27 @@
-<p>
-  quiz-panel works!
-</p>
+<div [hidden]="hide">
+  <p [hidden]="active || finished">
+    Hey, try this quiz! Click start to begin.
+  </p>
+  <app-quiz-question
+    [hidden]="!active || finished"
+    [active]="active"
+    (onFinished)="finishQuiz($event)"
+    >
+  </app-quiz-question>
 
-<app-quiz-question
+  <button
+  [hidden]="active || finished"
+    (click)="startQuiz()">
+    Start Quiz
+  </button>
 
-  >
-</app-quiz-question>
+  <button
+  [hidden]="!finished"
+    (click)="finishQuiz()">
+    Finish Quiz
+  </button>
 
-<!--<button (click)="getNextQuestion()">
-  {{buttonText}}
-</button>-->
+  <p [hidden]="!(active && finished)"> Thanks for taking the quiz! You got {{scoreString}} correct!</p>
+</div>
+
 

@@ -1,14 +1,12 @@
-<p>
-  quiz-question works!
-</p>
-
 <h3>{{questionText}}</h3>
-<app-quiz-answers [currentQuestion]="currentQuestion">
+<app-quiz-answers
+  [currentQuestion]="currentQuestion"
+  [currentAIdx]="currentAIdx"
+  (onAnswerChoice)="onAnswerChoice($event)">
 </app-quiz-answers>
 
 <button
-  [hidden]="!hasNext"
-  (click)="getNextQuestion()">
-  {{buttonText}}
+  (click)="proceed()">
+  Next
 </button>
 

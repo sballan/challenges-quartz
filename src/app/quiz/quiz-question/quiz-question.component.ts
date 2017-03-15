@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Question, AnswerSet } from '../models';
+import { Question, AnswerSet, Answer, Quiz } from '../models';
+
 import { QuestionService } from '../services/question.service';
-import { AnswerService } from '../services/answer.service';
+import { AnswerService, ScoreObj } from '../services/answer.service'
 
 @Component({
   moduleId: module.id,
@@ -12,20 +13,31 @@ import { AnswerService } from '../services/answer.service';
   providers: [QuestionService]
 })
 export class QuizQuestionComponent implements OnInit {
-  @Output() onSubmission = new EventEmitter<number>();
+  @Input() active: boolean;
+  @Output() onFinished = new EventEmitter<ScoreObj>()
+
+  private currentAIdx = -1;
 
   constructor(
     private questionService: QuestionService,
     private answerService: AnswerService
   ) { }
 
+  ngOnInit() {
+    if (this.active) {
+      this.questionService.startQuiz();
+    }
+  }
+
   get currentQuestion(): Question {
-    console.log("accessing question service from quiz question")
     return this.questionService.currentQuestion;
   }
 
+  get currentQuiz(): Quiz {
+    return this.questionService.currentQuiz;
+  }
+
   get questionText() {
-    console.log("accessing question text from quiz question")
     return this.currentQuestion.question;
   }
 
@@ -33,22 +45,42 @@ export class QuizQuestionComponent implements OnInit {
     return this.questionService.hasNext;
   }
 
+  onAnswerChoice(aIdx: number) {
+    console.log("ON ANSWER CHOICE", aIdx)
+    this.currentAIdx = aIdx;
+  }
+
+  addAnswer() {
+    this.answerService.add(this.currentAIdx, this.currentQuestion);
+    this.currentAIdx = -1;
+  }
+
+  proceed() {
+    if (this.hasNext) {
+      console.log("PROCEED, hasNext")
+      this.getNextQuestion();
+    }
+    else { this.submit(); }
+  }
+
   getNextQuestion() {
-
+    if (this.currentAIdx >= 0) {
+      console.log("SUPER adding to question", this.currentAIdx)
+      this.addAnswer();
+      this.questionService.getNext();
+    }
   }
 
-  // get currentAnswer() : number {
-  //   return this._currentAnswer;
-  // }
-
-  // set currentAnswer(aIdx: number) {
-  //   this._currentAnswer = aIdx;
-  //   this.onAnswerChoice.emit(aIdx);
-  // }
-
-
-
-  ngOnInit() {
+  submit() {
+    this.addAnswer();
+    console.log("I'M SUBMITTING", this.currentQuiz)
+    const scoreObj = this.answerService.getScore(this.currentQuiz);
+    console.log("AND I GOT THE SCORE!")
+    this.onFinished.emit(scoreObj);
   }
+
+
+
+
 
 }

@@ -32,12 +32,21 @@ export class QuestionService {
     return this.currentMeta.qIdxCurrent;
   }
 
+  set currentIndex(qIdx: number) {
+    this.currentMeta.qIdxCurrent = qIdx;
+  }
+
   get currentQuestion(): Question {
     return this.currentQuiz.questions[this.currentIndex];
   }
 
   get hasNext() { return this.currentIndex < this.currentQuiz.length - 1; }
   get hasPrev() { return this.currentIndex > 0; }
+
+  getNext() {
+    if (this.hasNext) { this.currentIndex++; }
+    else throw Error('There is no next question');
+  }
 
   startQuiz() {
     const meta: QuizMeta = { qIdxCurrent: 0, startedAt: Date.now() };

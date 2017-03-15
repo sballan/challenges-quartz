@@ -14,20 +14,22 @@ export class QuizAnswersComponent implements OnInit {
   @Input() currentQuestion: Question;
   @Output() onAnswerChoice = new EventEmitter<number>();
 
+  @Input() currentAIdx: number;
+
   constructor() { }
 
-  private _currentAnswer: number;
 
   get answersText() {
     return this.currentQuestion.answers;
   }
 
-  get currentAnswer() : number {
-    return this._currentAnswer;
+  get currentAnswer(): number {
+    if (this.currentAIdx < 0) { return undefined; }
+    return this.currentAIdx;
   }
 
   set currentAnswer(aIdx: number) {
-    this._currentAnswer = aIdx;
+    this.currentAIdx = aIdx;
     this.onAnswerChoice.emit(aIdx);
   }
 
